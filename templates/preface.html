@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block title %}项目主题展示{% endblock %}
+
+{% block body %}
+  <div class="intro">
+    <canvas id="particle-canvas" aria-hidden="true"></canvas>
+
+    <header class="intro-header">
+      <div class="container">
+        <div class="badge">Thesis Prelude</div>
+        <h1 class="title">大数据算法毕设 · 论文结构导览</h1>
+        <p class="subtitle">以数学语言组织思路，用结构化路径呈现研究脉络与实现细节。</p>
+        <div class="cta-row">
+          <button class="btn primary" type="button">查看目录</button>
+          <button class="btn ghost" type="button">阅读摘要</button>
+        </div>
+      </div>
+    </header>
+
+    <section class="intro-panels container">
+      <article class="panel">
+        <h2>问题定义</h2>
+        <p>符号化描述数据规模、约束条件与优化目标。</p>
+      </article>
+      <article class="panel">
+        <h2>算法框架</h2>
+        <p>展示核心流程、关键算子与复杂度推导。</p>
+      </article>
+      <article class="panel">
+        <h2>实验设计</h2>
+        <p>数据集、评价指标与对照实验设置清晰可追踪。</p>
+      </article>
+      <a class="panel panel-link" href="{{ url_for('results') }}">
+        <h2>结果分析</h2>
+        <p>误差、稳定性与可扩展性指标的可视化呈现。</p>
+      </a>
+    </section>
+  </div>
+{% endblock %}

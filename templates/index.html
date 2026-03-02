@@ -1,0 +1,137 @@
+{% extends "base.html" %}
+
+{% block title %}结果展示前置页{% endblock %}
+
+{% block body %}
+  <div class="intro">
+    <canvas id="particle-canvas" aria-hidden="true"></canvas>
+
+    <header class="intro-header">
+      <div class="container">
+        <div class="badge">Results Showcase</div>
+        <h1 class="title">大数据算法毕设 · 结果展示页</h1>
+        <p class="subtitle">集中呈现算法渲染结果图、关键指标与多数据集对比。</p>
+        <div class="cta-row">
+          <button class="btn primary" type="button">查看结果图</button>
+          <button class="btn ghost" type="button">对比数据集</button>
+        </div>
+      </div>
+    </header>
+
+    <section class="results-layout container">
+      <div class="result-figure">
+        <div class="figure-header">
+          <h2>结果图渲染</h2>
+          <div class="panel-meta">支持算法输出的 canvas / svg / img</div>
+        </div>
+        <div class="figure-canvas">
+          <div class="figure-placeholder">
+            <div class="placeholder-grid"></div>
+            <div class="placeholder-label">Algorithm Render Output</div>
+            <div class="placeholder-caption" id="figure-caption">Dataset A · 结果图示意</div>
+          </div>
+        </div>
+        <div class="figure-foot">
+          <span class="tag">分辨率: 1920 x 1080</span>
+          <span class="tag">渲染耗时: 1.42s</span>
+          <span class="tag">更新频率: 12 fps</span>
+        </div>
+      </div>
+
+      <aside class="result-panel">
+        <div class="panel-head">
+          <h2>数据集切换</h2>
+          <div class="panel-meta">展示不同数据结果与关键指标</div>
+        </div>
+
+        <div class="result-tabs" id="dataset-tabs">
+          <button class="tab active" type="button" data-dataset="a">Dataset A</button>
+          <button class="tab" type="button" data-dataset="b">Dataset B</button>
+          <button class="tab" type="button" data-dataset="c">Dataset C</button>
+        </div>
+
+        <div class="metric-grid">
+          <article class="metric-card">
+            <h3>准确率</h3>
+            <div class="metric" data-field="accuracy">92.4%</div>
+            <p>Top-1 Accuracy / Macro Avg</p>
+          </article>
+          <article class="metric-card">
+            <h3>运行耗时</h3>
+            <div class="metric" data-field="latency">1.42s</div>
+            <p>单轮渲染平均耗时</p>
+          </article>
+          <article class="metric-card">
+            <h3>资源占用</h3>
+            <div class="metric" data-field="memory">3.6GB</div>
+            <p>峰值显存 / 内存占用</p>
+          </article>
+        </div>
+
+        <div class="panel-foot note" id="dataset-note">
+          Dataset A 使用 3.2M 样本，包含 16 维核心特征。
+        </div>
+      </aside>
+    </section>
+
+    <section class="results-compare container">
+      <div class="panel-head">
+        <h2>指标对比表</h2>
+        <div class="panel-meta">对照不同数据源与参数设置</div>
+      </div>
+      <div class="result-table">
+        <div class="table-row head">
+          <div>指标</div>
+          <div>Dataset A</div>
+          <div>Dataset B</div>
+          <div>Dataset C</div>
+        </div>
+        <div class="table-row">
+          <div>F1-score</div>
+          <div>0.903</div>
+          <div>0.887</div>
+          <div>0.914</div>
+        </div>
+        <div class="table-row">
+          <div>Recall</div>
+          <div>0.876</div>
+          <div>0.861</div>
+          <div>0.902</div>
+        </div>
+        <div class="table-row">
+          <div>Precision</div>
+          <div>0.932</div>
+          <div>0.911</div>
+          <div>0.928</div>
+        </div>
+        <div class="table-row">
+          <div>速度提升</div>
+          <div>1.00x</div>
+          <div>1.18x</div>
+          <div>1.25x</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="results-gallery container">
+      <div class="panel-head">
+        <h2>结果图集</h2>
+        <div class="panel-meta">不同参数组的可视化结果</div>
+      </div>
+      <div class="gallery-grid">
+        <div class="gallery-card">
+          <div class="gallery-thumb">Render A1</div>
+          <div class="gallery-meta">参数组 α=0.1 / 迭代 120</div>
+        </div>
+        <div class="gallery-card">
+          <div class="gallery-thumb">Render B4</div>
+          <div class="gallery-meta">参数组 β=0.5 / 迭代 160</div>
+        </div>
+        <div class="gallery-card">
+          <div class="gallery-thumb">Render C2</div>
+          <div class="gallery-meta">参数组 γ=0.8 / 迭代 200</div>
+        </div>
+      </div>
+    </section>
+  </div>
+{% endblock %}

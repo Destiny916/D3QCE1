@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+
+{% block title %}结果展示前置页{% endblock %}
+
+{% block body %}
+  <div class="intro">
+    <canvas id="particle-canvas" aria-hidden="true"></canvas>
+
+    <header class="intro-header">
+      <div class="container">
+        <div class="badge">Results Showcase</div>
+        <h1 class="title">大数据算法毕设 · 结果展示页</h1>
+        <p class="subtitle">集中呈现算法渲染结果图、关键指标与多数据集对比。</p>
+        <div class="cta-row">
+          <a class="btn ghost" href="{{ url_for('index') }}">返回前置页</a>
+          <button class="btn primary" type="button">查看结果图</button>
+        </div>
+      </div>
+    </header>
+
+    <section class="results-layout container">
+      <aside class="dataset-panel">
+        <div class="panel-head">
+          <h2>数据集选择</h2>
+          <div class="panel-meta">切换不同数据结果</div>
+        </div>
+
+        <div class="result-tabs vertical" id="dataset-tabs">
+          {% for name in datasets %}
+            <button class="tab{% if loop.first %} active{% endif %}" type="button" data-dataset="{{ name }}">{{ name }}</button>
+          {% endfor %}
+          {% if datasets|length == 0 %}
+            <button class="tab active" type="button" data-dataset="示例数据集">示例数据集</button>
+          {% endif %}
+        </div>
+
+        <label class="dataset-upload">
+          <span>添加数据集文件</span>
+          <input id="dataset-input" type="file" accept=".txt" multiple />
+        </label>
+      </aside>
+
+      <div class="result-figure">
+        <div class="figure-toolbar">
+          <div class="toolbar-title">调度结果可视化</div>
+          <div class="toolbar-controls">
+            <button class="zoom-btn" id="zoom-out" title="缩小" type="button">−</button>
+            <span class="zoom-level" id="zoom-level">100%</span>
+            <button class="zoom-btn" id="zoom-in" title="放大" type="button">+</button>
+            <button class="zoom-btn reset" id="zoom-reset" title="重置" type="button">⟲</button>
+          </div>
+        </div>
+        <div class="figure-canvas" id="figure-canvas">
+          <div id="plot3d" class="plot-3d"></div>
+          <div id="schedule-wrap" class="schedule-wrap">
+            <div id="schedule-plot-axes" class="schedule-plot axes-layer" aria-hidden="true"></div>
+            <div id="schedule-plot-data" class="schedule-plot data-layer" aria-label="工件排序图"></div>
+            <div id="particle-layer" class="particle-layer"></div>
+          </div>
+          <div class="figure-placeholder">
+            <div class="placeholder-grid"></div>
+            <div class="placeholder-label">Algorithm Render Output</div>
+            <div class="placeholder-caption" id="figure-caption">{{ current_dataset if current_dataset else (datasets[0] if datasets else '示例数据集') }} · 结果图示意</div>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  <script src="https://cdn.plot.ly/plotly-2.30.0.min.js"></script>
+  <script id="dataset-seed" type="application/json">{{ datasets|tojson }}</script>
+  <script id="plot-data" type="application/json">{{ plot_points|tojson }}</script>
+  <script id="schedule-data" type="application/json">{{ processes|tojson }}</script>
+{% endblock %}
